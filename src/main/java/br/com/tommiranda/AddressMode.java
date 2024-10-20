@@ -85,12 +85,18 @@ public enum AddressMode {
     ;
 
     private final int bytes;
+    private final Supplier<Integer> fn;
 
     AddressMode(int bytes, Supplier<Integer> fn) {
         this.bytes = bytes;
+        this.fn = fn;
     }
 
     public int getBytes() {
         return bytes;
+    }
+
+    public int fetch() {
+        return fn.get();
     }
 }
