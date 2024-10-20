@@ -11,13 +11,13 @@ public class CPU {
 
     public boolean pageCrossed;
 
-    class Status {
-        public byte C; // Carry
-        public byte Z; // Zero
-        public byte I; // Interrupt Disable
-        public byte D; // Decimal Mode
-        public byte B; // Break Command
-        public byte V; // Overflow
-        public byte N; // Negative
+    public static class Status {
+        public int C; // Carry
+        public int Z; // Zero
+        public int I; // Interrupt Disable
+        public int D; // Decimal Mode
+        public int B; // Break Command
+        public int V; // Overflow
+        public int N; // Negative
     }
 }
