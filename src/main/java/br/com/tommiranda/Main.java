@@ -7,7 +7,11 @@ import java.nio.file.Path;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Bus.ROM = Files.readAllBytes(Path.of("Tetris.nes"));
+        byte[] cartridge = Files.readAllBytes(Path.of("Tetris.nes"));
+
+        for (int i = 0; i < cartridge.length; i++) {
+            Bus.RAM[i + 0x8000] = cartridge[i];
+        }
 
         System.out.println("NES ROM loaded!");
     }
