@@ -10,7 +10,7 @@ public class Main {
         byte[] cartridge = Files.readAllBytes(Path.of("Tetris.nes"));
 
         for (int i = 0; i < cartridge.length; i++) {
-            Bus.RAM[i + 0x8000] = cartridge[i];
+            Bus.Global[i + 0x8000] = cartridge[i];
         }
 
         System.out.println("NES ROM loaded!");
