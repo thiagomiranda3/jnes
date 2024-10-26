@@ -1,20 +1,21 @@
-package br.com.tommiranda.instructions;
+package br.com.tommiranda.cpu.instructions;
 
 import br.com.tommiranda.Bus;
-import br.com.tommiranda.CPU;
-import br.com.tommiranda.Opcode;
+import br.com.tommiranda.cpu.CPU;
+import br.com.tommiranda.cpu.Opcode;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static br.com.tommiranda.AddressMode.IMPLIED;
+import static br.com.tommiranda.cpu.AddressMode.IMPLIED;
 
-public class StackOps {
+public class StackOperations {
 
     private static final CPU cpu = Bus.cpu;
-    public static final Map<Integer, Opcode> table = new HashMap<>();
 
-    static {
+    public static Map<Integer, Opcode> getTable() {
+        Map<Integer, Opcode> table = new HashMap<>();
+
         // PHA - Push Accumulator
         table.put(0x48, new Opcode(0x48, "PHA", IMPLIED, 3, () -> {
             Bus.write(0x100 + cpu.SP, cpu.A);
@@ -44,5 +45,7 @@ public class StackOps {
             cpu.status.fromByte(Bus.read(0x100 + cpu.SP));
             return 4;
         }));
+
+        return table;
     }
 }

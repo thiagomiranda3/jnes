@@ -1,20 +1,21 @@
-package br.com.tommiranda.instructions;
+package br.com.tommiranda.cpu.instructions;
 
 import br.com.tommiranda.Bus;
-import br.com.tommiranda.CPU;
-import br.com.tommiranda.Opcode;
+import br.com.tommiranda.cpu.CPU;
+import br.com.tommiranda.cpu.Opcode;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static br.com.tommiranda.AddressMode.IMPLIED;
+import static br.com.tommiranda.cpu.AddressMode.IMPLIED;
 
-public class Transfers {
+public class TransfersOperations {
 
     private static final CPU cpu = Bus.cpu;
-    public static final Map<Integer, Opcode> table = new HashMap<>();
 
-    static {
+    public static Map<Integer, Opcode> getTable() {
+        Map<Integer, Opcode> table = new HashMap<>();
+
         // TAX - Transfer Accumulator to X
         table.put(0xAA, new Opcode(0xAA, "TAX", IMPLIED, 2, () -> {
             cpu.X = cpu.A;
@@ -65,5 +66,7 @@ public class Transfers {
 
             return 2;
         }));
+
+        return table;
     }
 }

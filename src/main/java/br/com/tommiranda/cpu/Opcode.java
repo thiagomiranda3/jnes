@@ -1,4 +1,4 @@
-package br.com.tommiranda;
+package br.com.tommiranda.cpu;
 
 import java.util.function.Supplier;
 
