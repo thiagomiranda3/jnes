@@ -1,5 +1,7 @@
 package br.com.tommiranda.cpu;
 
+import br.com.tommiranda.Bus;
+
 public class CPU {
 
     public int PC; // Program Counter
@@ -10,6 +12,25 @@ public class CPU {
     public final Status status = new Status();
 
     public boolean pageCrossed;
+
+    public long executedCycles = 0;
+    public long burnCycles = 0;
+
+    public void clock() {
+        if (burnCycles == 0) {
+            int opcode = Bus.read(PC++);
+            Opcode op = OpTable.get(opcode);
+            if (op == null) {
+                System.out.println("Invalid opcode: " + opcode);
+                return;
+            }
+
+            burnCycles = op.instruction().get();
+            executedCycles += burnCycles;
+        }
+
+        burnCycles--;
+    }
 
     public static class Status {
         public int C; // Carry

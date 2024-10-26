@@ -7,9 +7,9 @@ import java.util.Map;
 
 public final class OpTable {
 
-    private Map<Integer, Opcode> table = new HashMap<>();
+    private static Map<Integer, Opcode> table = new HashMap<>();
 
-    public OpTable() {
+    static {
         table.putAll(LoadStoreOperations.getTable());
         table.putAll(TransfersOperations.getTable());
         table.putAll(StackOperations.getTable());
@@ -21,5 +21,9 @@ public final class OpTable {
         table.putAll(BranchOperations.getTable());
         table.putAll(StatusChangeOperations.getTable());
         table.putAll(SystemOperations.getTable());
+    }
+
+    public static Opcode get(int opcode) {
+        return table.get(opcode);
     }
 }
